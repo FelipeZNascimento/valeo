@@ -1,0 +1,57 @@
+@use "./spacings" as spacing;
+
+@each $name, $pixels in spacing.$spacings {
+    .top-margin-#{$name} {
+        margin-top: #{$pixels};
+    }
+}
+
+@each $name, $pixels in spacing.$spacings {
+    .left-margin-#{$name} {
+        margin-left: #{$pixels};
+    }
+}
+
+@each $name, $pixels in spacing.$spacings {
+    .right-margin-#{$name} {
+        margin-right: #{$pixels};
+    }
+}
+
+@each $name, $pixels in spacing.$spacings {
+    .bottom-margin-#{$name} {
+        margin-bottom: #{$pixels};
+    }
+}
+
+@each $name, $pixels in spacing.$spacings {
+    .margin-#{$name} {
+        margin: #{$pixels};
+    }
+}
+
+@each $name, $pixels in spacing.$spacings {
+    .all-margin-#{$name} {
+        margin: #{$pixels};
+    }
+}
+
+@mixin marged($direction, $size) {
+    @if $direction == top {
+        @extend .top-margin-#{$size};
+    } @else if $direction == right {
+        @extend .right-margin-#{$size};
+    } @else if $direction == bottom {
+        @extend .bottom-margin-#{$size};
+    } @else if $direction == left {
+        @extend .left-margin-#{$size};
+    } @else if $direction == vertical {
+        @extend .top-margin-#{$size};
+        @extend .bottom-margin-#{$size};
+    } @else if $direction == horizontal {
+        @extend .left-margin-#{$size};
+        @extend .right-margin-#{$size};
+    } @else if $direction == all {
+        @extend .all-margin-#{$size};
+    }
+}
