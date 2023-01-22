@@ -1,18 +1,102 @@
 @use "globals/colors.scss" as color;
 @use "globals/margins.scss" as margin;
 @use "globals/paddings.scss" as padding;
+@use "globals/alignments.scss" as align;
 
-.App {
+.container {
+    @include align.flexed(center, flex-start);
+    background-color: color.$grey;
+    background-image: url("assets/bg.jpg");
+    background-position: top;
+    background-repeat: repeat;
+}
+
+.content {
+    @include align.flexed(center, center);
+
     background-color: color.$sapphireblue;
-    text-align: center;
-    min-height: 100vh;
+    flex-direction: column;
+    width: 1200px;
 }
 
 section {
-    @include padding.padded(vertical, m);
+    @include align.text(center);
+    // @include padding.padded(vertical, m);
+    width: 100%;
 }
 
-h3, h4 {
+h3,
+h4 {
     @include padding.padded(all, none);
     @include margin.marged(all, none);
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+    background-color: transparent;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+        transform: scale(1.2);
+    }
+}
+
+.mainImageContainer {
+    &Desktop {
+        max-width: 100%;
+        height: calc(100vh - 80px);
+    }
+
+    &Mobile {
+        max-width: 100%;
+        height: calc(100vh - 48px);
+    }
+}
+
+.mainImage {
+    width: 100%;
+    position: static;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sectionTitle {
+    // max-width: 80%;
+    &Desktop {
+        width: 80%;
+    }
+    &Mobile {
+        width: 100%;
+    }
+}
+
+.galeria {
+    @include align.flexed(center, center);
+    @include margin.marged(all, l2);
+
+    flex-wrap: wrap;
+    gap: 20px;
+
+    img {
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        max-height: 180px;
+        transition: all 0.3s ease;
+        width: auto;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+}
+
+.modalImage {
+    height: 100%;
+    width: 100%;
+}
+
+header {
+    width: 100%;
 }
