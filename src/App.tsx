@@ -1,44 +1,82 @@
-import React, { useState } from "react";
-import styles from "./App.module.scss";
-import { Navbar, TNavbarButton, Sidenav } from "@omegafox/components";
-import { isMobile } from "react-device-detect";
+import React, { useState } from 'react';
+import { Navbar, TNavbarButton, Sidenav } from '@omegafox/components';
+import { isMobile } from 'react-device-detect';
+import classNames from 'classnames';
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+import styles from './App.module.scss';
+
+// Assets
+// import valeo from './assets/valeo.jpg';
+import convite from './assets/convite.jpg';
+import presentes from './assets/presentes.jpg';
+// import foto01 from './assets/foto01.jpg';
+import logo from './assets/logo.png';
+import main from './assets/main.jpg';
+import bg from './assets/bg.jpg';
+
+// Sections
+import Local from './sections/Local';
+import Galeria from './sections/Galeria';
 
 const App = () => {
   const [selectedMenuId, setSelectedMenuId] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navbarButtons = [
     {
-      id: 0,
-      text: "Val & Leo",
-      url: "#valeo",
-    },
-    {
       id: 1,
-      text: "Local",
-      url: "#local",
+      text: 'Local',
+      url: 'local'
     },
     {
       id: 2,
-      text: "Galeria",
-      url: "#galeria",
+      text: 'Galeria',
+      url: 'galeria'
+    },
+    {
+      id: 0,
+      text: '',
+      url: 'valeo',
+      renderingFunction: () => (
+        <img className={styles.logo} alt="Logo" src={logo} />
+      )
     },
     {
       id: 3,
-      text: "Confirmar Presença",
-      url: "#convite",
+      text: 'Confirmar Presença',
+      url: 'convite'
     },
     {
       id: 4,
-      text: "Presentes",
-      url: "#presentes",
-    },
+      text: 'Presentes',
+      url: 'presentes'
+    }
   ];
 
+  const mainImageContainerClass = classNames({
+    [styles.mainImageContainerMobile]: isMobile,
+    [styles.mainImageContainerDesktop]: !isMobile
+  });
+
+  const sectionTitleClass = classNames({
+    [styles.sectionTitleMobile]: isMobile,
+    [styles.sectionTitleDesktop]: !isMobile
+  });
+
   const handleNavbarClick = (button: TNavbarButton) => {
+    if (isMobileMenuOpen) {
+      setIsMobileMenuOpen(false);
+    }
+
     setSelectedMenuId(button.id);
+    const element = document.getElementById(button.url);
+    if (element) {
+      const yOffset = -80;
+      const y =
+        element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
     console.log(button.url);
   };
 
@@ -46,25 +84,27 @@ const App = () => {
     return (
       <>
         <Navbar
+          isSlim
           navbarLeft={[
             {
               id: 0,
-              text: "",
-              url: "",
+              text: '',
+              url: '',
               renderingFunction: () => (
                 <FontAwesomeIcon className={styles.icon} icon={faBars} />
-              ),
-            },
+              )
+            }
           ]}
-          platform="copa"
+          theme="valeo"
           selectedId={0}
-          onClick={handleNavbarClick}
+          onClick={() => setIsMobileMenuOpen(true)}
         />
         <Sidenav
           isOpen={isMobileMenuOpen}
           selectedId={selectedMenuId}
-          sidenavButtons={[]}
-          onClick={() => console.log("click")}
+          sidenavButtons={navbarButtons}
+          theme="valeo"
+          onClick={handleNavbarClick}
           onClose={() => setIsMobileMenuOpen(false)}
         />
       </>
@@ -74,8 +114,10 @@ const App = () => {
   const renderBrowserMenu = () => {
     return (
       <Navbar
+        isSticky
+        sameSizeButtons
         navbarLeft={navbarButtons}
-        platform="copa"
+        theme="valeo"
         selectedId={selectedMenuId}
         onClick={handleNavbarClick}
       />
@@ -83,38 +125,33 @@ const App = () => {
   };
 
   return (
-    <div className={styles.App}>
-      <header>
-        {isMobile && renderMobileMenu()}
-        {!isMobile && renderBrowserMenu()}
-      </header>
-      <section id="home">
-        <h2>Val & Leo</h2>
-      </section>
-      <section id="local">
-        <h2>Local</h2>
-        <h3>Villaggio Di Trento Eventos</h3>
-        <h4>Rua Nicola Pellanda, 7465 - Umbará, Curitiba, Paraná</h4>
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14394.038297466659!2d-49.2749047!3d-25.5879782!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xa27410d01320cd53!2sVillaggio%20Di%20Trento%20Eventos!5e0!3m2!1spt-PT!2spt!4v1673807917633!5m2!1spt-PT!2spt"
-          width="600"
-          height="450"
-          style={{ border: 0 }}
-          allowFullScreen={true}
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          title="Villaggio Di Trento Eventos"
-        ></iframe>
-      </section>
-      <section id="galeria">
-        <h2>Galeria</h2>
-      </section>
-      <section id="convite">
-        <h2>Convite</h2>
-      </section>
-      <section id="presentes">
-        <h2>Presentes</h2>
-      </section>
+    <div className={styles.container}>
+      <div className={styles.content}>
+        <header>
+          {isMobile && renderMobileMenu()}
+          {!isMobile && renderBrowserMenu()}
+        </header>
+        <div className={mainImageContainerClass}>
+          <img
+            id="valeo"
+            alt="Foto 01 - Val e Leo"
+            className={styles.mainImage}
+            src={main}
+          />
+        </div>
+        <section id="local">
+          <Local />
+        </section>
+        <section id="galeria">
+          <Galeria />
+        </section>
+        <section id="convite">
+          <img alt="Convite" className={sectionTitleClass} src={convite} />
+        </section>
+        <section id="presentes">
+          <img alt="Presentes" className={sectionTitleClass} src={presentes} />
+        </section>
+      </div>
     </div>
   );
 };
