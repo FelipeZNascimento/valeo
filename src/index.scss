@@ -1,6 +1,10 @@
 @use "globals/colors.scss" as color;
 
 body {
+    background-image: url("assets/bg.jpg");
+    background-position: top;
+    background-repeat: repeat;
+
     color: color.$grey;
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
@@ -16,4 +20,8 @@ code {
 header {
     position: sticky;
     top: 0;
+}
+
+img {
+    max-width: 100%;
 }

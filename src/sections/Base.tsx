@@ -1,33 +1,47 @@
 import React, { useState } from 'react';
-import { Navbar, TNavbarButton, Sidenav } from '@omegafox/components';
 import { isMobile } from 'react-device-detect';
-import classNames from 'classnames';
+import { Navbar, TNavbarButton, Sidenav } from '@omegafox/components';
+import { useNavigate } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
-import styles from './App.module.scss';
+import styles from '../Home.module.scss';
+import logo from '../assets/logo.png';
 
-// Assets
-// import valeo from './assets/valeo.jpg';
-import convite from './assets/convite.jpg';
-import presentes from './assets/presentes.jpg';
-// import foto01 from './assets/foto01.jpg';
-import logo from './assets/logo.png';
-import main from './assets/main.jpg';
-import bg from './assets/bg.jpg';
+interface Props {
+  children: React.ReactNode;
+}
 
-// Sections
-import Local from './sections/Local';
-import Galeria from './sections/Galeria';
-
-const App = () => {
+const Base = ({ children }: Props) => {
   const [selectedMenuId, setSelectedMenuId] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const scrollToAnchor = (url: string) => {
+    const element = document.getElementById(url);
+    if (element) {
+      const yOffset = -80;
+      const y =
+        element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
+
+  const handleNavbarClick = (button: TNavbarButton) => {
+    navigate(`/#${button.url}`);
+    if (isMobileMenuOpen) {
+      setIsMobileMenuOpen(false);
+    }
+
+    setSelectedMenuId(button.id);
+    scrollToAnchor(button.url);
+  };
+
   const navbarButtons = [
     {
       id: 1,
-      text: 'Local',
-      url: 'local'
+      text: 'Informações',
+      url: 'informacoes'
     },
     {
       id: 2,
@@ -53,33 +67,6 @@ const App = () => {
       url: 'presentes'
     }
   ];
-
-  const mainImageContainerClass = classNames({
-    [styles.mainImageContainerMobile]: isMobile,
-    [styles.mainImageContainerDesktop]: !isMobile
-  });
-
-  const sectionTitleClass = classNames({
-    [styles.sectionTitleMobile]: isMobile,
-    [styles.sectionTitleDesktop]: !isMobile
-  });
-
-  const handleNavbarClick = (button: TNavbarButton) => {
-    if (isMobileMenuOpen) {
-      setIsMobileMenuOpen(false);
-    }
-
-    setSelectedMenuId(button.id);
-    const element = document.getElementById(button.url);
-    if (element) {
-      const yOffset = -80;
-      const y =
-        element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    }
-    console.log(button.url);
-  };
-
   const renderMobileMenu = () => {
     return (
       <>
@@ -123,7 +110,6 @@ const App = () => {
       />
     );
   };
-
   return (
     <div className={styles.container}>
       <div className={styles.content}>
@@ -131,29 +117,10 @@ const App = () => {
           {isMobile && renderMobileMenu()}
           {!isMobile && renderBrowserMenu()}
         </header>
-        <div className={mainImageContainerClass}>
-          <img
-            id="valeo"
-            alt="Foto 01 - Val e Leo"
-            className={styles.mainImage}
-            src={main}
-          />
-        </div>
-        <section id="local">
-          <Local />
-        </section>
-        <section id="galeria">
-          <Galeria />
-        </section>
-        <section id="convite">
-          <img alt="Convite" className={sectionTitleClass} src={convite} />
-        </section>
-        <section id="presentes">
-          <img alt="Presentes" className={sectionTitleClass} src={presentes} />
-        </section>
+        {children}
       </div>
     </div>
   );
 };
 
-export default App;
+export default Base;

@@ -1,0 +1,69 @@
+@use "../globals/colors.scss" as color;
+@use "../globals/margins.scss" as margin;
+@use "../globals/paddings.scss" as padding;
+@use "../globals/alignments.scss" as align;
+
+.sectionTitle {
+    &Desktop {
+        width: 80%;
+    }
+    &Mobile {
+        width: 100%;
+    }
+}
+
+.textFieldContainer {
+    display: flex;
+    margin: auto;
+
+    &Desktop {
+        width: 40vw;
+
+        input {
+            @include margin.marged(horizontal, s);
+            @include padding.padded(horizontal, l);
+            @include padding.padded(vertical, s);
+
+            border: 2px solid color.$dark-grey;
+            font-size: 36px;
+            transition: all 0.3s ease-in-out;
+            text-align: center;
+            width: 100%;
+            flex: 1;
+
+            &:focus {
+                border: 2px solid color.$tiffany;
+                outline: none;
+                transform: scale(1.2);
+            }
+        }
+    }
+    &Mobile {
+        width: 80vw;
+
+        input {
+            @include margin.marged(horizontal, s);
+            @include padding.padded(horizontal, s);
+            @include padding.padded(vertical, s);
+
+            border: 2px solid color.$dark-grey;
+            font-size: 18px;
+            transition: all 0.3s ease-in-out;
+            text-align: center;
+            width: 100%;
+            flex: 1;
+
+            &:focus {
+                border: 2px solid color.$tiffany;
+                outline: none;
+                transform: scale(1.2);
+            }
+        }
+    }
+}
+
+.buttonContainer {
+    @include padding.padded(all, l);
+    margin: 0 auto;
+    width: 40vw;
+}

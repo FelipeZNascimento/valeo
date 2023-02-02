@@ -5,10 +5,6 @@
 
 .container {
     @include align.flexed(center, flex-start);
-    background-color: color.$grey;
-    background-image: url("assets/bg.jpg");
-    background-position: top;
-    background-repeat: repeat;
 }
 
 .content {
@@ -21,12 +17,13 @@
 
 section {
     @include align.text(center);
-    // @include padding.padded(vertical, m);
     width: 100%;
 }
 
+h2,
 h3,
-h4 {
+h4,
+h5 {
     @include padding.padded(all, none);
     @include margin.marged(all, none);
 }
@@ -71,27 +68,6 @@ h4 {
     }
 }
 
-.galeria {
-    @include align.flexed(center, center);
-    @include margin.marged(all, l2);
-
-    flex-wrap: wrap;
-    gap: 20px;
-
-    img {
-        cursor: pointer;
-        display: flex;
-        justify-content: space-between;
-        max-height: 180px;
-        transition: all 0.3s ease;
-        width: auto;
-
-        &:hover {
-            transform: scale(1.1);
-        }
-    }
-}
-
 .modalImage {
     height: 100%;
     width: 100%;
@@ -99,4 +75,17 @@ h4 {
 
 header {
     width: 100%;
+}
+
+.giftsContainer {
+    display: flex;
+
+    .options {
+        @include padding.padded(horizontal, l);
+        @include align.flexed(center, center);
+
+        flex: 1;
+        height: auto;
+        max-width: 100%;
+    }
 }
