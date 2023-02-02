@@ -1,0 +1,39 @@
+@use "../globals/colors.scss" as color;
+@use "../globals/margins.scss" as margin;
+@use "../globals/paddings.scss" as padding;
+@use "../globals/alignments.scss" as align;
+
+.sectionTitle {
+    &Desktop {
+        width: 80%;
+    }
+    &Mobile {
+        width: 100%;
+    }
+}
+
+.galeria {
+    @include align.flexed(center, center);
+    @include margin.marged(all, l2);
+
+    flex-wrap: wrap;
+    gap: 20px;
+
+    img {
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        max-height: 180px;
+        transition: all 0.3s ease;
+        width: auto;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+}
+
+.modalImage {
+    height: 100%;
+    width: 100%;
+}

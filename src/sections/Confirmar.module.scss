@@ -1,0 +1,62 @@
+@use "../globals/colors.scss" as color;
+@use "../globals/margins.scss" as margin;
+@use "../globals/paddings.scss" as padding;
+@use "../globals/alignments.scss" as align;
+
+.container {
+    min-height: calc(100vh - 80px);
+    width: 100%;
+}
+
+.guestLine {
+    &Desktop {
+        @include align.flexed(center, center);
+        @include padding.padded(vertical, s);
+        @include padding.padded(horizontal, l);
+        flex: 1;
+        margin: 0 auto;
+        width: 50%;
+    }
+
+    &Mobile {
+        @include align.flexed(center, center);
+        @include padding.padded(vertical, s);
+        @include padding.padded(horizontal, none);
+        flex: 1;
+    }
+
+    &:nth-child(even) {
+        background-color: rgba(color.$dark-grey, 0.1);
+    }
+
+    div {
+        @include align.flexed(center, center);
+    }
+    &:hover {
+        background-color: rgba(color.$dark-grey, 0.2);
+    }
+}
+
+.spacer {
+    @include padding.padded(horizontal, s);
+}
+
+.code {
+    @include padding.padded(horizontal, s2);
+    flex: 0;
+}
+
+.name {
+    @include padding.padded(horizontal, s2);
+    flex: 1;
+}
+
+.confirmed,
+.timestamp {
+    @include align.flexed(center, center);
+
+    @include padding.padded(horizontal, s2);
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+}

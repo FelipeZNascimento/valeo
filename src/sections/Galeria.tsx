@@ -3,13 +3,23 @@ import classNames from 'classnames';
 import { isMobile } from 'react-device-detect';
 import { Modal } from '@omegafox/components';
 
-import styles from '../App.module.scss';
+import styles from './Galeria.module.scss';
 
 // Assets
 import galeria from '../assets/galeria.jpg';
-import foto02 from '../assets/foto02.jpg';
-import foto03 from '../assets/foto03.jpg';
-import foto04 from '../assets/foto04.jpg';
+import foto01 from '../assets/galeria/01.jpg';
+import foto02 from '../assets/galeria/02.jpg';
+import foto03 from '../assets/galeria/03.jpg';
+import foto04 from '../assets/galeria/04.jpg';
+import foto05 from '../assets/galeria/05.jpg';
+import foto06 from '../assets/galeria/06.jpg';
+import foto07 from '../assets/galeria/07.jpg';
+import foto08 from '../assets/galeria/08.jpg';
+import foto09 from '../assets/galeria/09.jpg';
+import foto10 from '../assets/galeria/10.jpg';
+import foto11 from '../assets/galeria/11.jpg';
+import foto12 from '../assets/galeria/12.jpg';
+import foto13 from '../assets/galeria/13.jpg';
 
 type TGalleryPhotos = {
   id: number;
@@ -24,24 +34,19 @@ const Local = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const galleryPhotos = [
-    { id: 0, alt: 'Foto 01 - Val e Leo', url: foto02 },
-    { id: 1, alt: 'Foto 02 - Val e Leo', url: foto03 },
-    { id: 2, alt: 'Foto 03 - Val e Leo', url: foto04 },
-    {
-      id: 3,
-      alt: 'Foto 04 - Val e Leo',
-      url: 'https://images.adsttc.com/media/images/5b08/b87c/f197/ccb5/4900/00bd/medium_jpg/The_S_02_filter_edit2_06.jpg?1527298139'
-    },
-    {
-      id: 4,
-      alt: 'Foto 04 - Val e Leo',
-      url: 'https://images.adsttc.com/media/images/5b08/b87c/f197/ccb5/4900/00bd/medium_jpg/The_S_02_filter_edit2_06.jpg?1527298139'
-    },
-    {
-      id: 5,
-      alt: 'Foto 04 - Val e Leo',
-      url: 'https://images.adsttc.com/media/images/5b08/b87c/f197/ccb5/4900/00bd/medium_jpg/The_S_02_filter_edit2_06.jpg?1527298139'
-    }
+    { id: 0, alt: 'Foto 01 - Val e Leo', url: foto01 },
+    { id: 2, alt: 'Foto 02 - Val e Leo', url: foto02 },
+    { id: 3, alt: 'Foto 03 - Val e Leo', url: foto03 },
+    { id: 1, alt: 'Foto 04 - Val e Leo', url: foto04 },
+    { id: 4, alt: 'Foto 05 - Val e Leo', url: foto05 },
+    { id: 5, alt: 'Foto 06 - Val e Leo', url: foto06 },
+    { id: 6, alt: 'Foto 07 - Val e Leo', url: foto07 },
+    { id: 7, alt: 'Foto 08 - Val e Leo', url: foto08 },
+    { id: 8, alt: 'Foto 09 - Val e Leo', url: foto09 },
+    { id: 9, alt: 'Foto 10 - Val e Leo', url: foto10 },
+    { id: 10, alt: 'Foto 11 - Val e Leo', url: foto11 },
+    { id: 11, alt: 'Foto 12 - Val e Leo', url: foto12 },
+    { id: 12, alt: 'Foto 13 - Val e Leo', url: foto13 }
   ];
 
   const sectionTitleClass = classNames({
@@ -88,10 +93,11 @@ const Local = () => {
       <div className={styles.galeria}>
         {galleryPhotos.map((foto) => (
           <img
-            className={styles.modalImage}
-            onClick={() => handleImageClick(foto)}
             alt={foto.alt}
+            className={styles.modalImage}
+            loading="lazy"
             src={foto.url}
+            onClick={() => handleImageClick(foto)}
           />
         ))}
       </div>
