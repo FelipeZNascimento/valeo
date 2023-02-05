@@ -10,7 +10,7 @@ export type TGuest = {
   id: number;
   code: string;
   name: string;
-  confirmed: boolean;
+  confirmed: number;
   timestamp: string;
 };
 

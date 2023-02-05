@@ -9,6 +9,7 @@
 
 .content {
     @include align.flexed(center, center);
+    @include color.shadowed(color.$black, 0.2);
 
     background-color: color.$sapphireblue;
     flex-direction: column;
@@ -77,15 +78,52 @@ header {
     width: 100%;
 }
 
+.presentesInfo {
+    @include padding.padded(all, s);
+
+    font-size: 18px;
+    margin: 0 auto;
+    max-width: 800px;
+}
+
 .giftsContainer {
+    @include padding.padded(horizontal, l);
     display: flex;
 
+    .imgDesktop {
+        max-height: 200px;
+        max-width: 200px;
+    }
+
+    .imgMobile {
+        max-height: 200px;
+        max-width: 100%;
+    }
+
     .options {
-        @include padding.padded(horizontal, l);
+        @include padding.padded(horizontal, s);
         @include align.flexed(center, center);
 
+        flex-direction: column;
         flex: 1;
         height: auto;
         max-width: 100%;
+    }
+}
+
+.info {
+    @include align.flexed(center, flex-start);
+    @include padding.padded(horizontal, l4);
+
+    &Mobile {
+        @include align.flexed(center, center);
+        flex-direction: column;
+    }
+
+    div {
+        @include padding.padded(all, s);
+
+        align-self: stretch;
+        flex: 1;
     }
 }

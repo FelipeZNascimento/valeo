@@ -25,6 +25,11 @@ const Home = () => {
     [styles.sectionTitleDesktop]: !isMobile
   });
 
+  const imgClass = classNames({
+    [styles.imgMobile]: isMobile,
+    [styles.imgDesktop]: !isMobile
+  });
+
   return (
     <>
       <div className={mainImageContainerClass}>
@@ -46,9 +51,21 @@ const Home = () => {
       </section>
       <section id="presentes">
         <img alt="Presentes" className={sectionTitleClass} src={presentes} />
+        <p className={styles.presentesInfo}>
+          Amigos e familiares, gastamos muito com a festa! <br />
+          Caso queiram nos ajudar a iniciar a vida de casados, deixamos abaixo
+          duas opções: PIX e Lista de Presentes. Ao clicar no link do iCasei,
+          você será encaminhado à lista onde poderá efetuar o pagamento como
+          preferir - à vista, a prazo e até fiado.
+        </p>
         <div className={styles.giftsContainer}>
           <div className={styles.options}>
-            <img alt="Pix QR Code" src={pix} />
+            <img className={imgClass} alt="Pix QR Code" src={pix} />
+            <p>
+              Leonardo Francisco Dorigam
+              <br />
+              CPF 052.249.039-55
+            </p>
           </div>
           <div className={styles.options}>
             <a
@@ -57,11 +74,12 @@ const Home = () => {
               rel="noreferrer"
             >
               <img
+                className={imgClass}
                 alt="Lista de Presentes iCasei"
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Novo_Logotipo_iCasei.png/1200px-Novo_Logotipo_iCasei.png"
               />
-              Lista de Presentes iCasei
             </a>
+            <p>Lista de Presentes iCasei</p>
           </div>
         </div>
       </section>
