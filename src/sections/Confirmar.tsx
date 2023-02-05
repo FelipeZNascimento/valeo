@@ -167,7 +167,7 @@ const Confirmar = () => {
       </h1>
       {params.code === 'all' && (
         <div style={{ textAlign: 'center' }}>
-          <p>Confirmados: {returnChosenLength(1)}</p>
+          <p>Confirmados: 2 + {returnChosenLength(1)}</p>
           <p>Não vão: {returnChosenLength(0)}</p>
           <p>Ainda não decidiram: {returnChosenLength(null)}</p>
         </div>
