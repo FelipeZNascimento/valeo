@@ -57,8 +57,17 @@ const Confirmar = () => {
     navigate(`/c/${code}`);
   };
 
+  const returnChosenLength = (status: number | null) => {
+    const allGuests = allGuestsResult.data?.result.guests;
+    if (allGuests) {
+      return allGuests.filter((guest) => guest.confirmed === status).length;
+    }
+
+    return 0;
+  };
+
   const renderAllGuests = () => {
-    const returnConfirmation = (status: boolean | null) => {
+    const returnConfirmation = (status: number | null) => {
       if (status === null) {
         return '';
       }
@@ -119,7 +128,7 @@ const Confirmar = () => {
               <div className={styles.confirmed}>
                 <Button
                   isShadowed
-                  variant={guest.confirmed ? 'primary' : 'white'}
+                  variant={guest.confirmed === 1 ? 'primary' : 'white'}
                   onClick={() =>
                     setGuestTrigger({
                       id: guest.id,
@@ -133,7 +142,7 @@ const Confirmar = () => {
                 <div className={styles.spacer} />
                 <Button
                   isShadowed
-                  variant={!guest.confirmed ? 'primary' : 'white'}
+                  variant={guest.confirmed === 0 ? 'primary' : 'white'}
                   onClick={() =>
                     setGuestTrigger({
                       id: guest.id,
@@ -153,6 +162,16 @@ const Confirmar = () => {
 
   return (
     <div className={styles.container}>
+      <h1 style={{ textAlign: 'center' }}>
+        Favor confirmar presença até 12/03.
+      </h1>
+      {params.code === 'all' && (
+        <div style={{ textAlign: 'center' }}>
+          <p>Confirmados: {returnChosenLength(1)}</p>
+          <p>Não vão: {returnChosenLength(0)}</p>
+          <p>Ainda não decidiram: {returnChosenLength(null)}</p>
+        </div>
+      )}
       {params.code === 'all' && renderAllGuests()}
       {params.code !== 'all' && renderGuest()}
     </div>

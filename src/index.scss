@@ -25,3 +25,12 @@ header {
 img {
     max-width: 100%;
 }
+
+a {
+    color: color.$tiffany;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
