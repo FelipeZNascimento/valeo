@@ -163,7 +163,7 @@ const Confirmar = () => {
   return (
     <div className={styles.container}>
       <h1 style={{ textAlign: 'center' }}>
-        Favor confirmar presença até 12/03.
+        Favor confirmar presença até 01/03.
       </h1>
       {params.code === 'all' && (
         <div style={{ textAlign: 'center' }}>
