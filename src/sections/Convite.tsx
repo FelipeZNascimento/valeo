@@ -104,9 +104,6 @@ const Convite = () => {
   return (
     <>
       <img alt="Convite" className={sectionTitleClass} src={convite} />
-      <h1 style={{ textAlign: 'center' }}>
-        Favor confirmar presença até 01/03.
-      </h1>
       <div className={textFieldContainerClass} onPaste={handlePaste}>
         <input type="text" maxLength={1} ref={digit1} onKeyUp={handleKeyUp} />
         <input type="text" maxLength={1} ref={digit2} onKeyUp={handleKeyUp} />
